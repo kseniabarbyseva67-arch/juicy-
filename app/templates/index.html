@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Falcon ReID</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Falcon Vehicle ReID</h1>
+      <p>Сопоставление автомобилей по визуальному признаку без распознавания госномера</p>
+    </div>
+    <a href="/docs" target="_blank">Swagger API ↗</a>
+  </header>
+
+  <section class="card">
+    <h2>1. Добавить объект в галерею</h2>
+    <form id="galleryForm">
+      <input type="file" name="image" accept="image/*" required />
+      <input name="image_id" placeholder="image_id" required />
+      <input name="vehicle_id" placeholder="vehicle_id (необязательно)" />
+      <input name="bbox" value='{"x":0,"y":0,"w":640,"h":480}' required />
+      <button>Добавить</button>
+    </form>
+    <pre id="galleryOut"></pre>
+  </section>
+
+  <section class="card">
+    <h2>2. Найти совпадение</h2>
+    <form id="queryForm">
+      <input type="file" name="image" accept="image/*" required />
+      <input name="bbox" value='{"x":0,"y":0,"w":640,"h":480}' required />
+      <label>Top-K <input type="number" name="top_k" value="10" min="1" max="100" /></label>
+      <label>Порог отказа <input type="number" name="threshold" value="{{ threshold }}" min="-1" max="1" step="0.01" /></label>
+      <button>Искать</button>
+    </form>
+    <div id="status"></div>
+    <div id="results"></div>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

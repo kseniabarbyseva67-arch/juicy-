@@ -1,0 +1,14 @@
+
+services:
+  reid:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      REFUSAL_THRESHOLD: "0.82"
+      DATA_DIR: "/app/data"
+    volumes:
+      - reid_data:/app/data
+    restart: unless-stopped
+volumes:
+  reid_data:
